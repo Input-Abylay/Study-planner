@@ -1,0 +1,25 @@
+{% extends "planner/base.html" %}
+
+{% block title %}Notes{% endblock %}
+
+{% block content %}
+    <h1>Your Notes</h1>
+
+    <form method="post" class="card-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Save Note</button>
+    </form>
+
+    {% if notes %}
+        {% for note in notes %}
+            <div class="note-card">
+                <strong>{{ note.subject.name }}</strong>
+                <p>{{ note.content }}</p>
+                <small>{{ note.created_at|date:"d M Y, H:i" }}</small>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No notes yet.</p>
+    {% endif %}
+{% endblock %}

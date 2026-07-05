@@ -1,0 +1,23 @@
+{% extends "planner/base.html" %}
+
+{% block title %}Subjects{% endblock %}
+
+{% block content %}
+    <h1>Your Subjects</h1>
+
+    <form method="post" class="card-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Add Subject</button>
+    </form>
+
+    <ul class="subject-list">
+        {% for subject in subjects %}
+            <li style="border-left: 6px solid {{ subject.color }};">
+                {{ subject.name }}
+            </li>
+        {% empty %}
+            <li>No subjects yet.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,133 @@
+* { box-sizing: border-box; }
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    background: #f4f6fb;
+    color: #222;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2b3a67;
+    color: white;
+    padding: 14px 28px;
+}
+
+.navbar .brand {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.nav-links a, .nav-links .link-btn {
+    color: white;
+    text-decoration: none;
+    margin-left: 18px;
+}
+
+.badge-nav {
+    margin-left: 18px;
+    background: #ffb703;
+    color: #222;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.btn {
+    display: inline-block;
+    background: #2b3a67;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    margin: 12px 0;
+}
+
+.link-btn {
+    background: none;
+    border: none;
+    color: #2b3a67;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font-size: 0.9rem;
+}
+
+.link-danger {
+    color: #d62828;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+.inline-form { display: inline; }
+
+.messages { list-style: none; padding: 0; }
+.message {
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+.message.success { background: #d4edda; color: #155724; }
+.message.error { background: #f8d7da; color: #721c24; }
+
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.task-table th, .task-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.task-table tr.done { opacity: 0.5; text-decoration: line-through; }
+
+.badge {
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    color: white;
+}
+.badge-low { background: #52b788; }
+.badge-medium { background: #f4a261; }
+.badge-high { background: #e63946; }
+
+.overdue-badge {
+    background: #e63946;
+    color: white;
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.filter-form { margin-bottom: 14px; }
+
+.card-form, .subject-list, .note-card {
+    background: white;
+    padding: 18px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.subject-list { list-style: none; padding: 0; }
+.subject-list li { padding: 8px 12px; margin-bottom: 6px; background: #fafafa; }
+
+.note-card { margin-bottom: 12px; }

@@ -1,0 +1,207 @@
+{
+  "info": {
+    "name": "Study Planner API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://127.0.0.1:8000/api" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"demo\",\n  \"password\": \"demopass123\"\n}"
+            },
+            "url": "{{base_url}}/auth/login/"
+          },
+          "response": [
+            {
+              "name": "200 OK example",
+              "body": "{\n  \"token\": \"9944b09199c62bcf9418ad846dd0e4bbdfc6ee4\",\n  \"user_id\": 1,\n  \"username\": \"demo\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Token {{token}}" }],
+            "url": "{{base_url}}/auth/logout/"
+          },
+          "response": [
+            { "name": "200 OK example", "body": "{ \"message\": \"Logged out successfully\" }" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Subjects",
+      "item": [
+        {
+          "name": "List Subjects",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Token {{token}}" }],
+            "url": "{{base_url}}/subjects/"
+          },
+          "response": [
+            { "name": "200 OK example", "body": "[\n  { \"id\": 1, \"name\": \"Math\", \"color\": \"#4287f5\", \"created_at\": \"2026-07-01T10:00:00Z\" }\n]" }
+          ]
+        },
+        {
+          "name": "Create Subject",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Token {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Physics\",\n  \"color\": \"#e63946\"\n}" },
+            "url": "{{base_url}}/subjects/"
+          },
+          "response": [
+            { "name": "201 Created example", "body": "{ \"id\": 2, \"name\": \"Physics\", \"color\": \"#e63946\", \"created_at\": \"2026-07-04T09:00:00Z\" }" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tasks",
+      "item": [
+        {
+          "name": "List/Create Tasks",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Token {{token}}" }],
+            "url": "{{base_url}}/tasks/"
+          },
+          "response": [
+            { "name": "200 OK example", "body": "[\n  { \"id\": 1, \"subject\": 1, \"subject_name\": \"Math\", \"title\": \"Finish VLSM lab\", \"priority\": \"high\", \"due_date\": \"2026-07-10T18:00:00Z\", \"is_done\": false }\n]" }
+          ]
+        },
+        {
+          "name": "Create Task",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Token {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"subject\": 1,\n  \"title\": \"Read Chapter 4\",\n  \"priority\": \"medium\",\n  \"due_date\": \"2026-07-15T12:00:00Z\"\n}" },
+            "url": "{{base_url}}/tasks/"
+          },
+          "response": [
+            { "name": "201 Created example", "body": "{ \"id\": 2, \"subject\": 1, \"title\": \"Read Chapter 4\", \"priority\": \"medium\", \"due_date\": \"2026-07-15T12:00:00Z\", \"is_done\": false }" }
+          ]
+        },
+        {
+          "name": "Get Task Detail",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Token {{token}}" }],
+            "url": "{{base_url}}/tasks/1/"
+          },
+          "response": [
+            { "name": "200 OK example", "body": "{ \"id\": 1, \"title\": \"Finish VLSM lab\", \"is_done\": false }" }
+          ]
+        },
+        {
+          "name": "Update Task",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Token {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"is_done\": true\n}" },
+            "url": "{{base_url}}/tasks/1/"
+          },
+          "response": [
+            { "name": "200 OK example", "body": "{ \"id\": 1, \"is_done\": true }" }
+          ]
+        },
+        {
+          "name": "Delete Task",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Token {{token}}" }],
+            "url": "{{base_url}}/tasks/1/"
+          },
+          "response": [
+            { "name": "204 No Content example", "body": "" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Study Sessions",
+      "item": [
+        {
+          "name": "List/Create Sessions",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Token {{token}}" }],
+            "url": "{{base_url}}/sessions/"
+          },
+          "response": [
+            { "name": "200 OK example", "body": "[\n  { \"id\": 1, \"task\": 1, \"started_at\": \"2026-07-04T09:00:00Z\", \"duration_minutes\": 45, \"notes\": \"Focused session\" }\n]" }
+          ]
+        },
+        {
+          "name": "Create Session",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Token {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"task\": 1,\n  \"started_at\": \"2026-07-04T09:00:00Z\",\n  \"duration_minutes\": 45,\n  \"notes\": \"Focused session\"\n}" },
+            "url": "{{base_url}}/sessions/"
+          },
+          "response": [
+            { "name": "201 Created example", "body": "{ \"id\": 1, \"task\": 1, \"duration_minutes\": 45 }" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Notes",
+      "item": [
+        {
+          "name": "List/Create Notes",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Token {{token}}" }],
+            "url": "{{base_url}}/notes/"
+          },
+          "response": [
+            { "name": "200 OK example", "body": "[\n  { \"id\": 1, \"subject\": 1, \"content\": \"Remember SVI config\", \"created_at\": \"2026-07-04T09:10:00Z\" }\n]" }
+          ]
+        },
+        {
+          "name": "Create Note",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Token {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"subject\": 1,\n  \"content\": \"Remember SVI config\"\n}" },
+            "url": "{{base_url}}/notes/"
+          },
+          "response": [
+            { "name": "201 Created example", "body": "{ \"id\": 1, \"subject\": 1, \"content\": \"Remember SVI config\" }" }
+          ]
+        }
+      ]
+    }
+  ]
+}
